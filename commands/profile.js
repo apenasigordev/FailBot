@@ -14,9 +14,9 @@ module.exports = {
     
       if(!d) return message.quote("ℹ️ • Usuário não registrado");
       let verifie = d.config.verified;
-    const background = await client.jimp.read("./profile.png")
-    const mask = await client.jimp.read("./mask.png")
-    const verified = await client.jimp.read("./verified.png")
+    const background = await client.jimp.read("./assets/profile.png")
+    const mask = await client.jimp.read("./assets/mask.png")
+    const verified = await client.jimp.read("./assets/verified.png")
     const avatar = await client.jimp.read(av);
    const lilita = await(client.jimp.loadFont("./font.fnt"));
     avatar.resize(100,100);
