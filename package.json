@@ -1,0 +1,27 @@
+{
+  "name": "FailBot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@jimp/gif": "^0.16.1",
+    "@jimp/plugin-print": "^0.16.1",
+    "@jimp/plugin-resize": "^0.16.1",
+    "@jimp/png": "^0.16.1",
+    "@vitalets/google-translate-api": "^7.0.0",
+    "canvas": "^2.8.0",
+    "discord.js": "^12.5.3",
+    "express": "^4.17.1",
+    "jimp": "^0.16.1",
+    "mongoose": "^5.12.14",
+    "node-fetch": "^2.6.1",
+    "nonimageapi": "^1.0.7",
+    "translate": "^1.2.3"
+  }
+}
