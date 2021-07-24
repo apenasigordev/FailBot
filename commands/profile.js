@@ -18,7 +18,7 @@ module.exports = {
     const mask = await client.jimp.read("./assets/mask.png")
     const verified = await client.jimp.read("./assets/verified.png")
     const avatar = await client.jimp.read(av);
-   const lilita = await(client.jimp.loadFont("./font.fnt"));
+   const lilita = await(client.jimp.loadFont("./font/font.fnt"));
     avatar.resize(100,100);
     mask.resize(100,100);
     verified.resize(30,29);
