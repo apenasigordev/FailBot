@@ -62,7 +62,7 @@ app.get("/", (req,res) => {
 
 app.listen(process.env.PORT)
 fs.readdir("./commands/", (err, files) => {
-    if (err) return console.log("Could not find any commands!")
+    /*if (err) return console.log("Could not find any commands!")
     const jsFiles = files.filter(f => f.split(".").pop() === "js")
     if (jsFiles.length <= 0) return console.log("Could not find any commands!")
     jsFiles.forEach(file => {
@@ -70,7 +70,16 @@ fs.readdir("./commands/", (err, files) => {
         console.log(`Loaded ${file}`)
         client.commands.set(cmd.name, cmd)
         if (cmd.aliases) cmd.aliases.forEach(alias => client.aliases.set(alias, cmd.name))
-    })
+    })*/
+const commandFolders = fs.readdirSync('./commands');
+
+for (const folder of commandFolders) {
+	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles) {
+		const command = require(`./commands/${folder}/${file}`);
+		client.commands.set(command.name, command);
+	}
+}
 })
 client.on("message", msg => {
   client.db.user.findOne({_id: msg.author.id}, function(e,d) {
