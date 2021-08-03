@@ -19,17 +19,17 @@ module.exports = {
     const verified = await client.jimp.read("./assets/verified.png")
     const avatar = await client.jimp.read(av);
    const lilita = await(client.jimp.loadFont("./font/font.fnt"));
-    avatar.resize(100,100);
-    mask.resize(100,100);
-    verified.resize(30,29);
+    avatar.resize(94,94);
+    mask.resize(94,94);
+    verified.resize(45,45);
     avatar.mask(mask);
-    background.composite(avatar, 47, 25);
+    background.composite(avatar, 70, 21);
     const modbadge = await(client.jimp.read("https://media.discordapp.net/attachments/853003246842675211/861411744412467240/New_Element_B727ADC.png"));
     modbadge.resize(41,41);
     if(verifie === true) {
-    background.composite(verified, 170,60);
+    background.composite(verified, 673,172);
     }
-//onst badges = [""];
+    
 
 
     background.print(lilita, 216, 53, member.user.username);

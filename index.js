@@ -5,8 +5,10 @@ const client = new Discord.Client({ws: {intents: myIntents}});
 const fs = require('fs');
 let prefix = "#";
 const nonimageapi = require('nonimageapi');
+const DisTube = require('distube');
 client.db = require('./db.js');
 client.prefix = "#";
+client.distube = new DisTube(client, { searchSongs: false, emitNewSongOnly: false, leaveOnFinish: true });
 client.image = new nonimageapi();
 client.config = require('./config.json');
 const Canvas = require('canvas');
@@ -78,6 +80,7 @@ for (const folder of commandFolders) {
 	for (const file of commandFiles) {
 		const command = require(`./commands/${folder}/${file}`);
 		client.commands.set(command.name, command);
+		if(command.aliases) command.aliases.forEach(alias => client.aliases.set(alias, command.name));
 	}
 }
 })
@@ -139,3 +142,25 @@ setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
     })
   })
 client.login(process.env.token);
+
+client.distube
+    .on("playSong", (message, queue, song) => {
+       const playing = new Discord.MessageEmbed()
+       .setTitle("🎶 • Tocando")
+       .setDescription(song.name)
+       .setThumbnail(song.thumbnail)
+       .addField("🕑 • Duração", song.formattedDuration)
+       .addField("👦 • Adicionado por", song.user)
+       .setColor("BLURPLE");
+       message.quote({embed: playing});
+    })
+    .on("addSong", (message, queue, song) => {
+            const added = new Discord.MessageEmbed()
+            .setTitle("🎶 • Adicionado")
+            .setDescription(song.name)
+            .setThumbnail(song.thumbnail)
+            .addField("🕑 • Duração", song.formattedDuration)
+            .addField("👦 • Adicionado por", song.user)
+            .setColor("BLURPLE");
+            message.quote({embed: added});
+    });
